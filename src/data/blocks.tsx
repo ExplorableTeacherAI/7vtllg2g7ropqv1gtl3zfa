@@ -1,6 +1,4 @@
 import { type ReactElement } from "react";
-// import { Block } from "@/components/templates";
-// import { StackLayout, SplitLayout, GridLayout, ScrollytellingLayout, ScrollStep, ScrollVisual } from "@/components/layouts";
 
 // Initialize variables and their colors from this file's variable definitions
 import { useVariableStore, initializeVariableColors } from "@/stores";
@@ -8,82 +6,40 @@ import { getDefaultValues, variableDefinitions } from "./variables";
 useVariableStore.getState().initialize(getDefaultValues());
 initializeVariableColors(variableDefinitions);
 
+// Import all sections
+import { section1Blocks } from "./sections/Section1WhatIsAlgebra";
+import { section2Blocks } from "./sections/Section2AlgebraicExpressions";
+import { section3Blocks } from "./sections/Section3SolvingSimpleEquations";
+import { section4Blocks } from "./sections/Section4BothSides";
+import { section5Blocks } from "./sections/Section5Substitution";
+import { section6Blocks } from "./sections/Section6ComplexSubstitution";
+import { section7Blocks } from "./sections/Section7PracticeChallenge";
+
 /**
  * ------------------------------------------------------------------
- * BLOCK CONFIGURATION
+ * ALGEBRA EXPLORABLE EXPLANATION
  * ------------------------------------------------------------------
- * This file is the entry point for your lesson content.
- * 
- * INSTRUCTIONS:
- * 1. Create your content using <Block> components.
- * 2. Use Layout components to organize your blocks.
- * 3. Add your blocks to the `blocks` array below.
- * 
+ *
+ * This lesson teaches algebra from zero knowledge to complex
+ * substitution problems. Each section builds on the previous one:
+ *
+ * 1. What is Algebra? - Variables as "mystery boxes"
+ * 2. Algebraic Expressions - Writing and reading 2x + 3
+ * 3. Solving Simple Equations - The balance principle
+ * 4. Variables on Both Sides - Collecting like terms
+ * 5. Introduction to Substitution - Replacing y with 2x
+ * 6. Complex Substitution - Multi-step problem solving
+ * 7. Practice Challenge - Progressive practice problems
+ *
  * ------------------------------------------------------------------
- * CROSS-BLOCK VARIABLES
- * ------------------------------------------------------------------
- * Variables can be shared across blocks using the global store.
- * 
- * DEFINE VARIABLES: src/data/variables.ts (use only variables.ts in this file; same structure as exampleBlocks + exampleVariables)
- * 
- * USAGE IN BLOCKS:
- * 
- * // Reading a value (auto-updates when changed):
- * import { useVar } from '@/stores';
- * const amplitude = useVar('amplitude', 1);
- * 
- * // Setting a value:
- * import { useSetVar } from '@/stores';
- * const setVar = useSetVar();
- * setVar('amplitude', 2.5);
- * 
- * // InlineScrubbleNumber (from variables.ts): getVariableInfo(name) + numberPropsFromDefinition(...)
- * <InlineScrubbleNumber varName="amplitude" {...numberPropsFromDefinition(getVariableInfo('amplitude'))} />
- * 
- * ------------------------------------------------------------------
- * AVAILABLE LAYOUTS
- * ------------------------------------------------------------------
- * 
- * 1. StackLayout
- *    - Best for: Title headers, introductory text, broad visualizations.
- *    - Usage:
- *      <StackLayout maxWidth="xl">
- *          <Block id="intro">...</Block>
- *      </StackLayout>
- * 
- * 2. SplitLayout
- *    - Best for: Side-by-side content (e.g., Text + Visualization).
- *    - Usage:
- *      <SplitLayout ratio="1:1" gap="lg">
- *          <Block id="left">...</Block>
- *          <Block id="right">...</Block>
- *      </SplitLayout>
- * 
- * 3. GridLayout
- *    - Best for: Multiple equal-sized items (cards, galleries).
- *    - Usage:
- *      <GridLayout columns={3} gap="md">
- *          <Block id="item-1">...</Block>
- *          <Block id="item-2">...</Block>
- *          <Block id="item-3">...</Block>
- *      </GridLayout>
- * 
- * 4. ScrollytellingLayout
- *    - Best for: Narrative steps with a reactive sticky visualization.
- *    - Usage:
- *      <ScrollytellingLayout varName="scrollStep" visualPosition="right">
- *          <ScrollStep><Block id="step-0">...</Block></ScrollStep>
- *          <ScrollStep><Block id="step-1">...</Block></ScrollStep>
- *          <ScrollVisual><Block id="viz">...</Block></ScrollVisual>
- *      </ScrollytellingLayout>
- * 
- * EXAMPLES:
- * See `src/data/exampleBlocks.tsx` for comprehensive examples.
- * 
- * NOTE: If you are seeing examples in the browser instead of this content,
- * check your .env file and set VITE_SHOW_EXAMPLES=false.
  */
 
 export const blocks: ReactElement[] = [
-    // Start adding your blocks here!
+    ...section1Blocks,
+    ...section2Blocks,
+    ...section3Blocks,
+    ...section4Blocks,
+    ...section5Blocks,
+    ...section6Blocks,
+    ...section7Blocks,
 ];

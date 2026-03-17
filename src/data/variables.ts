@@ -1,12 +1,12 @@
 /**
  * Variables Configuration
  * =======================
- * 
+ *
  * CENTRAL PLACE TO DEFINE ALL SHARED VARIABLES
- * 
+ *
  * This file defines all variables that can be shared across sections.
  * AI agents should read this file to understand what variables are available.
- * 
+ *
  * USAGE:
  * 1. Define variables here with their default values and metadata
  * 2. Use them in any section with: const x = useVar('variableName', defaultValue)
@@ -53,108 +53,347 @@ export interface VariableDefinition {
 
 /**
  * =====================================================
- * 🎯 DEFINE YOUR VARIABLES HERE
+ * 🎯 ALGEBRA LESSON VARIABLES
  * =====================================================
- * 
- * SUPPORTED TYPES:
- * 
- * 1. NUMBER (slider):
- *    { defaultValue: 5, type: 'number', min: 0, max: 10, step: 1 }
- * 
- * 2. TEXT (free text):
- *    { defaultValue: 'Hello', type: 'text', placeholder: 'Enter text...' }
- * 
- * 3. SELECT (dropdown):
- *    { defaultValue: 'sine', type: 'select', options: ['sine', 'cosine', 'tangent'] }
- * 
- * 4. BOOLEAN (toggle):
- *    { defaultValue: true, type: 'boolean' }
- * 
- * 5. ARRAY (list of numbers):
- *    { defaultValue: [1, 2, 3], type: 'array' }
- * 
- * 6. OBJECT (complex data):
- *    { defaultValue: { x: 5, y: 10 }, type: 'object', schema: '{ x: number, y: number }' }
  */
 export const variableDefinitions: Record<string, VariableDefinition> = {
-    // ========================================
-    // ADD YOUR VARIABLES HERE
-    // ========================================
-
-    // Uncomment and modify these examples for your lesson:
-
-    /*
     // ─────────────────────────────────────────
-    // NUMBER - Use with sliders
+    // SECTION 1: What is Algebra?
     // ─────────────────────────────────────────
-    myValue: {
+    mysteryBoxValue: {
         defaultValue: 5,
         type: 'number',
-        label: 'My Value',
-        description: 'A number that controls something',
-        unit: 'm',           // optional unit display
+        label: 'Mystery Box Value',
+        description: 'The hidden number inside the mystery box (x)',
+        min: 1,
+        max: 20,
+        step: 1,
+        color: '#62D0AD',
+    },
+    revealProgress: {
+        defaultValue: 0,
+        type: 'number',
+        label: 'Reveal Progress',
+        description: 'How much of the mystery box is revealed (0-100)',
+        min: 0,
+        max: 100,
+        step: 1,
+        color: '#8E90F5',
+    },
+    answerWhatIsVariable: {
+        defaultValue: '',
+        type: 'text',
+        label: 'What is a Variable Answer',
+        description: 'Student answer for what a variable represents',
+        placeholder: '???',
+        correctAnswer: 'number',
+        color: '#62D0AD',
+    },
+
+    // ─────────────────────────────────────────
+    // SECTION 2: Writing and Reading Algebraic Expressions
+    // ─────────────────────────────────────────
+    applesCount: {
+        defaultValue: 3,
+        type: 'number',
+        label: 'Number of Apples',
+        description: 'Number of apples in the bag',
+        min: 1,
+        max: 10,
+        step: 1,
+        color: '#F7B23B',
+    },
+    extraApples: {
+        defaultValue: 2,
+        type: 'number',
+        label: 'Extra Apples',
+        description: 'Additional apples given',
         min: 0,
         max: 10,
-        step: 0.5,
+        step: 1,
+        color: '#AC8BF9',
     },
-
-    // ─────────────────────────────────────────
-    // TEXT - Free text input
-    // ─────────────────────────────────────────
-    lessonTitle: {
-        defaultValue: 'My Lesson',
+    coefficientValue: {
+        defaultValue: 2,
+        type: 'number',
+        label: 'Coefficient',
+        description: 'The number multiplied by x',
+        min: 1,
+        max: 10,
+        step: 1,
+        color: '#8E90F5',
+    },
+    constantValue: {
+        defaultValue: 3,
+        type: 'number',
+        label: 'Constant',
+        description: 'The number added to the expression',
+        min: 0,
+        max: 10,
+        step: 1,
+        color: '#F8A0CD',
+    },
+    inputValueForExpression: {
+        defaultValue: 4,
+        type: 'number',
+        label: 'Input Value',
+        description: 'The value to substitute for x',
+        min: 0,
+        max: 10,
+        step: 1,
+        color: '#62D0AD',
+    },
+    answerExpressionResult: {
+        defaultValue: '',
         type: 'text',
-        label: 'Lesson Title',
-        description: 'The title of your lesson',
-        placeholder: 'Enter a title...',
+        label: 'Expression Result Answer',
+        description: 'Student answer for expression evaluation',
+        placeholder: '???',
+        correctAnswer: '11',
+        color: '#62D0AD',
     },
 
     // ─────────────────────────────────────────
-    // SELECT - Dropdown with options
+    // SECTION 3: Solving Simple Equations
     // ─────────────────────────────────────────
-    difficulty: {
-        defaultValue: 'medium',
-        type: 'select',
-        label: 'Difficulty',
-        description: 'The difficulty level of the lesson',
-        options: ['easy', 'medium', 'hard', 'expert'],
+    balanceLeftWeight: {
+        defaultValue: 8,
+        type: 'number',
+        label: 'Left Side Weight',
+        description: 'Weight on the left side of the balance',
+        min: 1,
+        max: 20,
+        step: 1,
+        color: '#62CCF9',
+    },
+    balanceRightWeight: {
+        defaultValue: 8,
+        type: 'number',
+        label: 'Right Side Weight',
+        description: 'Weight on the right side of the balance',
+        min: 1,
+        max: 20,
+        step: 1,
+        color: '#F4A89A',
+    },
+    simpleEquationX: {
+        defaultValue: 5,
+        type: 'number',
+        label: 'Unknown x',
+        description: 'The unknown value to solve for',
+        min: 1,
+        max: 15,
+        step: 1,
+        color: '#62D0AD',
+    },
+    subtractAmount: {
+        defaultValue: 0,
+        type: 'number',
+        label: 'Amount to Subtract',
+        description: 'Amount to subtract from both sides',
+        min: 0,
+        max: 10,
+        step: 1,
+        color: '#AC8BF9',
+    },
+    answerSimpleEquation: {
+        defaultValue: '',
+        type: 'text',
+        label: 'Simple Equation Answer',
+        description: 'Student answer for solving x + 3 = 10',
+        placeholder: '???',
+        correctAnswer: '7',
+        color: '#62D0AD',
     },
 
     // ─────────────────────────────────────────
-    // BOOLEAN - Toggle switch
+    // SECTION 4: Equations with Variables on Both Sides
     // ─────────────────────────────────────────
-    showHints: {
-        defaultValue: true,
-        type: 'boolean',
-        label: 'Show Hints',
-        description: 'Toggle to show or hide hints',
+    leftCoefficient: {
+        defaultValue: 3,
+        type: 'number',
+        label: 'Left Coefficient',
+        description: 'Coefficient of x on the left side',
+        min: 1,
+        max: 10,
+        step: 1,
+        color: '#8E90F5',
+    },
+    rightCoefficient: {
+        defaultValue: 1,
+        type: 'number',
+        label: 'Right Coefficient',
+        description: 'Coefficient of x on the right side',
+        min: 1,
+        max: 10,
+        step: 1,
+        color: '#F7B23B',
+    },
+    leftConstant: {
+        defaultValue: 4,
+        type: 'number',
+        label: 'Left Constant',
+        description: 'Constant on the left side',
+        min: 0,
+        max: 20,
+        step: 1,
+        color: '#F8A0CD',
+    },
+    rightConstant: {
+        defaultValue: 12,
+        type: 'number',
+        label: 'Right Constant',
+        description: 'Constant on the right side',
+        min: 0,
+        max: 30,
+        step: 1,
+        color: '#A8D5A2',
+    },
+    answerBothSides: {
+        defaultValue: '',
+        type: 'text',
+        label: 'Both Sides Answer',
+        description: 'Student answer for equation with x on both sides',
+        placeholder: '???',
+        correctAnswer: '4',
+        color: '#62D0AD',
     },
 
     // ─────────────────────────────────────────
-    // ARRAY - List of numbers
+    // SECTION 5: Introduction to Substitution
     // ─────────────────────────────────────────
-    dataPoints: {
-        defaultValue: [1, 4, 9, 16, 25],
-        type: 'array',
-        label: 'Data Points',
-        description: 'Y-values for plotting a graph',
+    yValue: {
+        defaultValue: 4,
+        type: 'number',
+        label: 'y Value',
+        description: 'The value of y in the substitution',
+        min: 1,
+        max: 10,
+        step: 1,
+        color: '#AC8BF9',
+    },
+    substitutionX: {
+        defaultValue: 2,
+        type: 'number',
+        label: 'x for Substitution',
+        description: 'The value of x used in y = 2x',
+        min: 1,
+        max: 10,
+        step: 1,
+        color: '#62D0AD',
+    },
+    answerSubstitutionBasic: {
+        defaultValue: '',
+        type: 'text',
+        label: 'Basic Substitution Answer',
+        description: 'Student answer for basic substitution',
+        placeholder: '???',
+        correctAnswer: '11',
+        color: '#62D0AD',
     },
 
     // ─────────────────────────────────────────
-    // OBJECT - Complex structured data
+    // SECTION 6: Complex Substitution Problems
     // ─────────────────────────────────────────
-    graphSettings: {
-        defaultValue: { 
-            xMin: -10, 
-            xMax: 10, 
-            showGrid: true 
-        },
-        type: 'object',
-        label: 'Graph Settings',
-        description: 'Configuration for the graph display',
-        schema: '{ xMin: number, xMax: number, showGrid: boolean }',
+    complexX: {
+        defaultValue: 3,
+        type: 'number',
+        label: 'Complex Problem x',
+        description: 'Value of x in complex substitution',
+        min: 1,
+        max: 10,
+        step: 1,
+        color: '#62D0AD',
     },
-    */
+    complexY: {
+        defaultValue: 5,
+        type: 'number',
+        label: 'Complex Problem y',
+        description: 'Value of y in complex substitution',
+        min: 1,
+        max: 15,
+        step: 1,
+        color: '#AC8BF9',
+    },
+    scrollStep: {
+        defaultValue: 0,
+        type: 'number',
+        label: 'Scroll Step',
+        description: 'Current step in scrollytelling',
+        min: 0,
+        max: 5,
+        step: 1,
+    },
+    answerComplexSubstitution: {
+        defaultValue: '',
+        type: 'text',
+        label: 'Complex Substitution Answer',
+        description: 'Student answer for complex substitution problem',
+        placeholder: '???',
+        correctAnswer: '5',
+        color: '#62D0AD',
+    },
+
+    // ─────────────────────────────────────────
+    // SECTION 7: Practice Challenge
+    // ─────────────────────────────────────────
+    practiceStepProgress: {
+        defaultValue: 0,
+        type: 'number',
+        label: 'Practice Step',
+        description: 'Current step in practice challenge',
+        min: 0,
+        max: 5,
+        step: 1,
+    },
+    answerPractice1: {
+        defaultValue: '',
+        type: 'text',
+        label: 'Practice Answer 1',
+        description: 'Answer for practice question 1',
+        placeholder: '???',
+        correctAnswer: '6',
+        color: '#62D0AD',
+    },
+    answerPractice2: {
+        defaultValue: '',
+        type: 'text',
+        label: 'Practice Answer 2',
+        description: 'Answer for practice question 2',
+        placeholder: '???',
+        correctAnswer: '3',
+        color: '#8E90F5',
+    },
+    answerPractice3: {
+        defaultValue: '',
+        type: 'text',
+        label: 'Practice Answer 3',
+        description: 'Answer for practice question 3',
+        placeholder: '???',
+        correctAnswer: '7',
+        color: '#AC8BF9',
+    },
+    answerPracticeComplex: {
+        defaultValue: '',
+        type: 'text',
+        label: 'Practice Complex Answer',
+        description: 'Answer for complex practice question',
+        placeholder: '???',
+        correctAnswer: '2',
+        color: '#F7B23B',
+    },
+
+    // ─────────────────────────────────────────
+    // Highlight variables for linked highlights
+    // ─────────────────────────────────────────
+    activeHighlight: {
+        defaultValue: '',
+        type: 'text',
+        label: 'Active Highlight',
+        description: 'Currently highlighted element',
+        color: '#62D0AD',
+        bgColor: 'rgba(98, 208, 173, 0.15)',
+    },
 };
 
 /**
