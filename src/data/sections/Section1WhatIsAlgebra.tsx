@@ -28,134 +28,194 @@ import {
 import { useVar } from "@/stores";
 
 // ─────────────────────────────────────────
-// Mystery Box Visualization Component
+// Magician's Hat Visualization Component
 // ─────────────────────────────────────────
-function MysteryBoxVisualization() {
+function MagicianHatVisualization() {
     const mysteryValue = useVar("mysteryBoxValue", 5) as number;
     const revealProgress = useVar("revealProgress", 0) as number;
 
-    // Calculate opacity based on reveal progress
-    const numberOpacity = revealProgress / 100;
-    const lidOffset = (revealProgress / 100) * 40; // Lid opens as you reveal
+    // Calculate positions based on reveal progress
+    const pullHeight = (revealProgress / 100) * 120; // How high the number rises
+    const numberOpacity = Math.min(1, revealProgress / 50); // Fade in quickly
+    const sparkleOpacity = revealProgress > 20 ? Math.min(1, (revealProgress - 20) / 30) : 0;
+
+    // Sparkle positions (appear as number rises)
+    const sparkles = [
+        { x: 100, y: 100, delay: 0, size: 8 },
+        { x: 200, y: 90, delay: 0.2, size: 6 },
+        { x: 130, y: 70, delay: 0.4, size: 10 },
+        { x: 170, y: 60, delay: 0.1, size: 7 },
+        { x: 90, y: 130, delay: 0.3, size: 5 },
+        { x: 210, y: 120, delay: 0.5, size: 9 },
+    ];
 
     return (
         <div className="relative">
             <svg
-                viewBox="0 0 300 280"
+                viewBox="0 0 300 320"
                 width="100%"
-                height="280"
+                height="320"
                 className="mx-auto"
                 style={{ maxWidth: 300 }}
             >
-                {/* Background glow when revealed */}
-                {revealProgress > 50 && (
+                {/* Magical glow behind the hat */}
+                {revealProgress > 30 && (
                     <ellipse
                         cx="150"
-                        cy="160"
-                        rx={80 + revealProgress * 0.3}
-                        ry={60 + revealProgress * 0.2}
-                        fill={`rgba(98, 208, 173, ${(revealProgress - 50) / 200})`}
+                        cy="200"
+                        rx={70 + revealProgress * 0.4}
+                        ry={50 + revealProgress * 0.3}
+                        fill={`rgba(172, 139, 249, ${(revealProgress - 30) / 200})`}
                     />
                 )}
 
-                {/* Box body */}
-                <rect
-                    x="75"
-                    y="120"
-                    width="150"
-                    height="120"
-                    rx="8"
-                    fill="#8E90F5"
-                    stroke="#6366f1"
+                {/* Sparkles */}
+                {sparkles.map((sparkle, i) => (
+                    <g
+                        key={i}
+                        opacity={sparkleOpacity * (0.5 + Math.sin(revealProgress / 10 + sparkle.delay * 10) * 0.5)}
+                        transform={`translate(${sparkle.x}, ${sparkle.y - pullHeight * 0.3})`}
+                    >
+                        <polygon
+                            points={`0,-${sparkle.size} ${sparkle.size * 0.3},-${sparkle.size * 0.3} ${sparkle.size},0 ${sparkle.size * 0.3},${sparkle.size * 0.3} 0,${sparkle.size} -${sparkle.size * 0.3},${sparkle.size * 0.3} -${sparkle.size},0 -${sparkle.size * 0.3},-${sparkle.size * 0.3}`}
+                            fill="#F7B23B"
+                        />
+                    </g>
+                ))}
+
+                {/* The rising number (pulled from hat) */}
+                <g transform={`translate(150, ${220 - pullHeight})`}>
+                    {/* Number background circle */}
+                    <circle
+                        r={35}
+                        fill="#62D0AD"
+                        opacity={numberOpacity}
+                    />
+                    {/* The number itself */}
+                    <text
+                        y={12}
+                        textAnchor="middle"
+                        fontSize="42"
+                        fontWeight="bold"
+                        fill="white"
+                        opacity={numberOpacity}
+                    >
+                        {mysteryValue}
+                    </text>
+                </g>
+
+                {/* Hat brim (ellipse) */}
+                <ellipse
+                    cx="150"
+                    cy="250"
+                    rx="90"
+                    ry="20"
+                    fill="#1e293b"
+                    stroke="#0f172a"
                     strokeWidth="3"
                 />
 
-                {/* Box front face highlight */}
-                <rect
-                    x="85"
-                    y="130"
-                    width="130"
-                    height="100"
-                    rx="4"
-                    fill="rgba(255, 255, 255, 0.1)"
+                {/* Hat body (top part) */}
+                <path
+                    d="M 85 250 L 95 160 L 205 160 L 215 250 Z"
+                    fill="#1e293b"
+                    stroke="#0f172a"
+                    strokeWidth="2"
                 />
 
-                {/* Question mark (fades as you reveal) */}
+                {/* Hat band */}
+                <rect
+                    x="95"
+                    y="220"
+                    width="110"
+                    height="20"
+                    fill="#AC8BF9"
+                />
+
+                {/* Hat top (ellipse) */}
+                <ellipse
+                    cx="150"
+                    cy="160"
+                    rx="55"
+                    ry="12"
+                    fill="#334155"
+                    stroke="#1e293b"
+                    strokeWidth="2"
+                />
+
+                {/* Inner hat darkness (the opening) */}
+                <ellipse
+                    cx="150"
+                    cy="160"
+                    rx="45"
+                    ry="8"
+                    fill="#0f172a"
+                />
+
+                {/* Question mark inside hat (fades as number rises) */}
                 <text
                     x="150"
-                    y="195"
+                    y="200"
                     textAnchor="middle"
-                    fontSize="64"
+                    fontSize="36"
                     fontWeight="bold"
-                    fill="white"
-                    opacity={1 - numberOpacity}
+                    fill="#64748b"
+                    opacity={Math.max(0, 1 - revealProgress / 40)}
                 >
                     ?
                 </text>
 
-                {/* The hidden number (appears as you reveal) */}
-                <text
-                    x="150"
-                    y="195"
-                    textAnchor="middle"
-                    fontSize="56"
-                    fontWeight="bold"
-                    fill="#62D0AD"
-                    opacity={numberOpacity}
-                >
-                    {mysteryValue}
-                </text>
-
-                {/* Box lid (moves up as you reveal) */}
-                <g transform={`translate(0, ${-lidOffset})`}>
-                    {/* Lid back */}
-                    <polygon
-                        points="65,120 150,80 235,120"
-                        fill="#AC8BF9"
-                        stroke="#8b5cf6"
-                        strokeWidth="2"
-                    />
-                    {/* Lid front */}
+                {/* Magic wand */}
+                <g transform={`rotate(${-15 + revealProgress * 0.1}, 240, 180)`}>
+                    {/* Wand stick */}
                     <rect
-                        x="65"
-                        y="100"
-                        width="170"
-                        height="25"
-                        rx="4"
-                        fill="#AC8BF9"
-                        stroke="#8b5cf6"
-                        strokeWidth="2"
-                    />
-                    {/* Lid highlight */}
-                    <rect
-                        x="75"
-                        y="105"
-                        width="150"
-                        height="10"
+                        x="220"
+                        y="140"
+                        width="8"
+                        height="80"
                         rx="2"
-                        fill="rgba(255, 255, 255, 0.2)"
+                        fill="#1e293b"
                     />
+                    {/* Wand tip */}
+                    <rect
+                        x="220"
+                        y="130"
+                        width="8"
+                        height="15"
+                        rx="2"
+                        fill="white"
+                    />
+                    {/* Wand sparkle */}
+                    {revealProgress > 10 && (
+                        <circle
+                            cx="224"
+                            cy="128"
+                            r={3 + Math.sin(revealProgress / 5) * 2}
+                            fill="#F7B23B"
+                            opacity={0.8}
+                        />
+                    )}
                 </g>
 
                 {/* The letter x label */}
                 <text
                     x="150"
-                    y="265"
+                    y="300"
                     textAnchor="middle"
                     fontSize="28"
                     fontWeight="bold"
                     fill="#62D0AD"
                 >
-                    x
+                    x = ?
                 </text>
             </svg>
             <InteractionHintSequence
-                hintKey="mystery-box-reveal"
+                hintKey="magic-hat-reveal"
                 steps={[
                     {
                         gesture: "drag-horizontal",
-                        label: "Drag to peek inside the box",
-                        position: { x: "50%", y: "85%" },
+                        label: "Drag to pull the number from the hat",
+                        position: { x: "50%", y: "90%" },
                     },
                 ]}
             />
@@ -221,45 +281,46 @@ export const section1Blocks: ReactElement[] = [
         </Block>
     </StackLayout>,
 
-    // Section heading for Mystery Box
+    // Section heading for Magician's Hat
     <StackLayout key="layout-algebra-mystery-heading" maxWidth="xl">
         <Block id="algebra-mystery-heading" padding="md">
             <EditableH2 id="h2-algebra-mystery-heading" blockId="algebra-mystery-heading">
-                The Mystery Box
+                The Magician's Hat
             </EditableH2>
         </Block>
     </StackLayout>,
 
-    // Mystery Box interactive visualization with explanation
+    // Magician's Hat interactive visualization with explanation
     <SplitLayout key="layout-algebra-mystery-box" ratio="1:1" gap="lg">
         <div className="space-y-4">
             <Block id="algebra-mystery-explanation" padding="sm">
                 <EditableParagraph id="para-algebra-mystery-explanation" blockId="algebra-mystery-explanation">
-                    Here is your mystery box, labeled with the letter{" "}
+                    Imagine you are a magician with a magical top hat. Inside hides a mystery number, which
+                    we call{" "}
                     <InlineSpotColor varName="mysteryBoxValue" color="#62D0AD">x</InlineSpotColor>.
-                    Right now, it is hiding the number{" "}
+                    Right now, the hat is hiding the number{" "}
                     <InlineScrubbleNumber
                         varName="mysteryBoxValue"
                         {...numberPropsFromDefinition(getVariableInfo("mysteryBoxValue"))}
-                    />. But do not worry, the variable{" "}
+                    />. The variable{" "}
                     <InlineSpotColor varName="mysteryBoxValue" color="#62D0AD">x</InlineSpotColor>{" "}
-                    is not scary at all. It is just a placeholder for a number we might not know yet.
+                    is not scary at all. It is just waiting to be revealed, like a rabbit from a hat!
                 </EditableParagraph>
             </Block>
             <Block id="algebra-mystery-reveal-control" padding="sm">
                 <EditableParagraph id="para-algebra-mystery-reveal" blockId="algebra-mystery-reveal-control">
-                    Peek inside the box by dragging the reveal slider:{" "}
+                    Pull the number out of the hat by dragging the magic slider:{" "}
                     <InlineScrubbleNumber
                         varName="revealProgress"
                         {...numberPropsFromDefinition(getVariableInfo("revealProgress"))}
                         formatValue={(v) => `${v}%`}
-                    />. Watch how the question mark transforms into the actual number. This is exactly what happens
-                    when we "solve for x" in algebra. We reveal the mystery!
+                    />. Watch the sparkles appear as the number floats up! This is exactly what happens
+                    when we "solve for x" in algebra. We perform the magic trick of revealing the mystery!
                 </EditableParagraph>
             </Block>
         </div>
         <Block id="algebra-mystery-visualization" padding="sm" hasVisualization>
-            <MysteryBoxVisualization />
+            <MagicianHatVisualization />
         </Block>
     </SplitLayout>,
 
