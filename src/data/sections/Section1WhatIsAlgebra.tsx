@@ -19,7 +19,6 @@ import {
     InlineTooltip,
     InlineSpotColor,
 } from "@/components/atoms";
-import { InteractionHintSequence } from "@/components/atoms/visual/InteractionHint";
 import {
     getVariableInfo,
     numberPropsFromDefinition,
@@ -209,16 +208,6 @@ function MagicianHatVisualization() {
                     x = ?
                 </text>
             </svg>
-            <InteractionHintSequence
-                hintKey="magic-hat-reveal"
-                steps={[
-                    {
-                        gesture: "drag-horizontal",
-                        label: "Drag to pull the number from the hat",
-                        position: { x: "50%", y: "90%" },
-                    },
-                ]}
-            />
         </div>
     );
 }
