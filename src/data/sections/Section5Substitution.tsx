@@ -20,7 +20,6 @@ import {
     InlineFormula,
 } from "@/components/atoms";
 import { FormulaBlock } from "@/components/molecules";
-import { InteractionHintSequence } from "@/components/atoms/visual/InteractionHint";
 import {
     getVariableInfo,
     numberPropsFromDefinition,
@@ -108,16 +107,6 @@ function SubstitutionVisualization() {
                     </text>
                 </g>
             </svg>
-            <InteractionHintSequence
-                hintKey="substitution-x-value"
-                steps={[
-                    {
-                        gesture: "drag-horizontal",
-                        label: "Drag x to see how substitution works",
-                        position: { x: "28%", y: "98%" },
-                    },
-                ]}
-            />
         </div>
     );
 }

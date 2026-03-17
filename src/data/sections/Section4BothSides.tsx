@@ -19,7 +19,6 @@ import {
     InlineFormula,
 } from "@/components/atoms";
 import { FormulaBlock } from "@/components/molecules";
-import { InteractionHintSequence } from "@/components/atoms/visual/InteractionHint";
 import {
     getVariableInfo,
     numberPropsFromDefinition,
@@ -167,16 +166,6 @@ function BothSidesVisualization() {
                     {hasSolution ? `x = ${solution}` : coeffDiff === 0 ? "No solution (coefficients equal)" : `x = ${solution.toFixed(2)}`}
                 </text>
             </svg>
-            <InteractionHintSequence
-                hintKey="both-sides-coefficients"
-                steps={[
-                    {
-                        gesture: "drag-horizontal",
-                        label: "Drag to change the coefficients",
-                        position: { x: "50%", y: "12%" },
-                    },
-                ]}
-            />
         </div>
     );
 }

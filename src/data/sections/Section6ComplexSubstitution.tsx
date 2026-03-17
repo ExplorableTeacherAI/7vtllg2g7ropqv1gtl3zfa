@@ -19,7 +19,6 @@ import {
     InlineSpotColor,
     InlineFormula,
 } from "@/components/atoms";
-import { InteractionHintSequence } from "@/components/atoms/visual/InteractionHint";
 import {
     getVariableInfo,
     numberPropsFromDefinition,
@@ -128,16 +127,6 @@ function ComplexSolvingVisualization() {
                     </text>
                 </g>
             </svg>
-            <InteractionHintSequence
-                hintKey="complex-substitution-solve"
-                steps={[
-                    {
-                        gesture: "drag-horizontal",
-                        label: "Adjust x to find the solution",
-                        position: { x: "88%", y: "32%" },
-                    },
-                ]}
-            />
         </div>
     );
 }

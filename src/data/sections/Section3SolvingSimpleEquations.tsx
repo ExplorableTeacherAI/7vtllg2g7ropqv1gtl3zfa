@@ -18,7 +18,6 @@ import {
     InlineTooltip,
 } from "@/components/atoms";
 import { FormulaBlock } from "@/components/molecules";
-import { InteractionHintSequence } from "@/components/atoms/visual/InteractionHint";
 import {
     getVariableInfo,
     numberPropsFromDefinition,
@@ -147,16 +146,6 @@ function BalanceScaleVisualization() {
                         : `x + ${3 - subtractAmount} = ${10 - subtractAmount}`}
                 </text>
             </svg>
-            <InteractionHintSequence
-                hintKey="balance-scale-subtract"
-                steps={[
-                    {
-                        gesture: "drag-horizontal",
-                        label: "Drag to subtract from both sides",
-                        position: { x: "50%", y: "92%" },
-                    },
-                ]}
-            />
         </div>
     );
 }

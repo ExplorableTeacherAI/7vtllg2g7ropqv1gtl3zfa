@@ -20,7 +20,6 @@ import {
     InlineFormula,
 } from "@/components/atoms";
 import { FormulaBlock } from "@/components/molecules";
-import { InteractionHintSequence } from "@/components/atoms/visual/InteractionHint";
 import {
     getVariableInfo,
     numberPropsFromDefinition,
@@ -214,16 +213,6 @@ function ExpressionMachineVisualization() {
                     {coefficient}x + {constant} = {step3}
                 </text>
             </svg>
-            <InteractionHintSequence
-                hintKey="expression-machine-input"
-                steps={[
-                    {
-                        gesture: "drag-horizontal",
-                        label: "Drag the input value to see the result change",
-                        position: { x: "15%", y: "28%" },
-                    },
-                ]}
-            />
         </div>
     );
 }
